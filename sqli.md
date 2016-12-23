@@ -40,3 +40,7 @@
   ' UNION SELECT name FROM sqlite_master WHERE type='table'
 ### Extracting column names from a table
   ' UNION SELECT sql FROM sqlite_master WHERE type='table' AND tbl_name = 'table_name'
+## Common-errs
+* `mysql` does a case insensitive search by default and also ignores the trailing spaces
+How to exploit that?
+A username `Admin` can be created and it can be used to sign-in as `admin`
