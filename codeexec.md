@@ -1,4 +1,4 @@
-###### `#` needs to be encoded in each case they are used through urls
+###### `#` needs to be encoded when attacks are used through urls
 
 #### Beware of the following functions : 
 ##eval
