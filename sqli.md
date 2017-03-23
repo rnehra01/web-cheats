@@ -50,7 +50,8 @@ __[In MsSQL, if second colums is `username` then the payload `' UNION SELECT 1,1
  In sqlite __sqlite_master__ replaces __information_schema__
  
   _[Vulnearable code]_ : `SELECT * FROM table_name WHERE username='$input_user' AND pass='$input_pass'`
-
+#### Extracting sqlite version
+  _[$input_user]_ : `' UNION SELECT sqlite_version()`
 #### Extracting table names
   _[$input_user]_ : `' UNION SELECT name FROM sqlite_master WHERE type='table'`
 #### Extracting column names from a table
