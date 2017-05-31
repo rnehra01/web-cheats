@@ -3,3 +3,4 @@ This repo is a collection of exploits (cheats) of web-vulnerabilities encountere
 
 * [SQL Injection](https://github.com/rnehra01/web-cheats/blob/master/sqli.md)
 * [Code-Injection](https://github.com/rnehra01/web-cheats/blob/master/codeexec.md)
+* [XSS](https://github.com/rnehra01/web-cheats/blob/master/xss.md)
